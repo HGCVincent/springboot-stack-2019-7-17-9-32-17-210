@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,8 +24,6 @@ public class CriminalCaseTest {
 
     @Test
     public void should_return_Case_when_give_case_id(){
-        Date caseDate=new Date(1970,1,1);
-        long caseTime=caseDate.getTime();
         CriminalCase criminalCase = new CriminalCase();
         criminalCase.setId(1);
         criminalCase.setCasename("连环杀人");
@@ -34,4 +33,18 @@ public class CriminalCaseTest {
 
         assertEquals("连环杀人",criminalCase1.getCasename());
     }
+
+    @Test
+    public void should_return_all_case(){
+        CriminalCase criminalCase = new CriminalCase();
+        criminalCase.setId(1);
+        criminalCase.setCasename("连环杀人");
+
+        criminalCaseRepository.save(criminalCase);
+        List<CriminalCase> cases = criminalCaseRepository.findAll();
+
+        assertEquals("连环杀人",cases.get(0).getCasename());
+    }
+
+
 }
