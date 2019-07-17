@@ -16,6 +16,7 @@ public class CriminalElements {
     @Column(length = 255,nullable = false)
     private String subjectiveElement;
 
+
     public int getId() {
         return id;
     }
@@ -39,4 +40,5 @@ public class CriminalElements {
     public void setSubjectiveElement(String subjectiveElement) {
         this.subjectiveElement = subjectiveElement;
     }
+
 }
