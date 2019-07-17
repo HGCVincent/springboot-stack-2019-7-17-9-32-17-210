@@ -11,8 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 @RunWith(SpringRunner.class)
@@ -44,6 +46,19 @@ public class CriminalCaseTest {
         List<CriminalCase> cases = criminalCaseRepository.findAll();
 
         assertEquals("连环杀人",cases.get(0).getCasename());
+    }
+
+    @Test
+    public void should_delete_case_by_id(){
+        CriminalCase criminalCase = new CriminalCase();
+        criminalCase.setId(1);
+        criminalCase.setCasename("连环杀人");
+
+        criminalCaseRepository.save(criminalCase);
+        criminalCaseRepository.deleteById(criminalCase.getId());
+
+
+        assertEquals(Optional.empty(),criminalCaseRepository.findById(criminalCase.getId()));
     }
 
 
